@@ -7,13 +7,14 @@ from src.swapi.people import get_person_by_id
 
 settings = get_settings()
 
+
 class App:
 
     def __init__(self, page: ft.Page) -> None:
         self.page = page
         self.page.title = settings.APP_TITLE
 
-        # InsecureRequestWarning
+        # Suppress InsecureRequestWarning
         requests.packages.urllib3.disable_warnings()
 
         persons = [
@@ -24,6 +25,6 @@ class App:
 
         list_view = ft.ListView()
         for person in persons:
-            list_view.controls.append(components.CardItemPerson(name=person.name))
+            list_view.controls.append(components.CardItemPerson(person=person))
 
         self.page.add(list_view)
